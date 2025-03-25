@@ -1,5 +1,22 @@
 # laravel_product_crud
 
+
+<h1>Project Setup Steps</h1>
+<ul>
+    <li>Download code from github.</li>
+    <li>Install composer into the project.</li>
+    <li>Create the .env file.</li>
+    <li>Copy the code of .env.example file and paste into .env file.</li>
+    <li>Create datebase into the mysql and put the same database name into the .env file "DB_DATABASE='your_database_name'".</li>
+    <li>Create APP_KEY by running command "php artisan key:generate" now it will showing in your .env file "APP_KEY=base..."</li>
+    <li>Run migrations and seeders with command "php artisan migrate --seed".</li>
+    <li>Run command "npm install" for vite dependencies.</li>
+    <li>Run command "npm run build" for production build.</li>
+    <li>All set...</li>
+</ul>
+
+<h1>Project View</h1>
+
 <h3>1. User Role </h3>
 <ul>
 <li>Super Admin</li>
