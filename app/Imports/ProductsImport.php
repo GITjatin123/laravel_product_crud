@@ -29,7 +29,7 @@ class ProductsImport implements ToCollection
                     'ref_no'  => mt_rand(100000, 999999),
                     'name'    => $row[0],
                     'price'   => $row[1],
-                    'description' => $row[2],
+//                    'description' => $row[2],
                 ]);
             }
         }
