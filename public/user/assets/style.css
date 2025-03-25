@@ -22,3 +22,6 @@
     --tw-text-opacity: 1;
     color: rgb(45, 45, 45);
 }
+.form-floating>label {
+    color: black;
+}

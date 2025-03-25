@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Components\Helper;
-use App\Constants\CommonConstants;
 use App\Models\Product;
-use App\Models\User;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use Nette\Utils\Random;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -98,8 +93,8 @@ class ProductController extends Controller
 //        dd($ref_no);
         $product = Product::where('ref_no', $ref_no)->first();
 
-        if ($product->image && \Storage::exists('public/' . $product->image)) {
-            \Storage::delete('public/' . $product->image);
+        if ($product->image && \Storage::exists('public/uploads/' . $product->image)) {
+            \Storage::delete('public/uploads/' . $product->image);
         }
 
         $product->delete();
@@ -117,7 +112,9 @@ class ProductController extends Controller
         $rules = [
             'name'  => ['required', 'max:255'],
             'price' => ['required', 'numeric','min:1'],
-            'image' => [$Product->id ? 'nullable' : 'required', 'image', 'mimes:jpg,jpeg,png', 'max:1024','min:500'],
+            'crop_data' => ['required'],
+//            'image' => ['image', 'mimes:jpg,jpeg,png', 'max:1024','min:5'],
+            'image' => [$Product->id ? 'nullable' : 'required', 'image', 'mimes:jpg,jpeg,png', 'max:1024','min:5'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -136,8 +133,16 @@ class ProductController extends Controller
         $Product->description = $request->input('desc');
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filePath = $file->store('uploads', 'public');
-            $Product->image = $filePath;
+            $cropData = json_decode($request->input('crop_data'), true);
+//            dd($cropData);
+            $img = Image::make($file);
+            if ($cropData) {
+                $img->crop((int) $cropData['width'], (int) $cropData['height'], (int) $cropData['x'], (int) $cropData['y']);
+            }
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $path = storage_path('app/public/uploads/' . $fileName);
+            $img->save($path);
+            $Product->image = $fileName;
         }
 
         if ($isNewRecord) {
@@ -147,6 +152,21 @@ class ProductController extends Controller
         }
 
         return redirect()->route('product.index')->with('success', 'Product created successfully.');
+    }
+    public function showUploadForm()
+    {
+        return view('upload');
+    }
+
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'excel_file' => 'required|mimes:xlsx,csv',
+        ]);
+
+        Excel::import(new ProductsImport, $request->file('excel_file'));
+
+        return back()->with('success', 'Products uploaded successfully!');
     }
 
 }

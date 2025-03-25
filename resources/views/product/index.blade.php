@@ -43,7 +43,7 @@
                                     <td>{{$productVal['name']}}</td>
                                     <td>{{$productVal['description']}}</td>
                                     <td>{{$productVal['price']}}</td>
-                                    <td><img src="{{ asset('storage/' . $productVal->image) }}" alt="Product Image" width="150"></td>
+                                    <td><img src="{{ asset('storage/uploads/' . $productVal->image) }}" alt="Product Image" width="150"></td>
                                     @if(auth()->check() && auth()->user()->role->name !== App\Constants\UserConstant::ROLE_STAFF)
                                         <td><a href="{{route('product.edit',$productVal->ref_no)}}"  class="btn btn-outline-warning">Edit</a></td>
                                         <td>
@@ -59,7 +59,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <th colspan="7" class="text-center">Product Not Found</th>
+                                <th colspan="{{(auth()->check() && auth()->user()->role->name === App\Constants\UserConstant::ROLE_STAFF) ? '5':'7' }}" class="text-center">Product Not Found</th>
                             </tr>
                         @endif
 
