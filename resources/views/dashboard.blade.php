@@ -13,6 +13,8 @@
                     <h2>This Project Is Based On Product CRUD</h2>
                     <ul class="mt-8" style="list-style: circle;">
                         <li><p>You can <strong>view,create,@if(auth()->check() && auth()->user()->role->name !== App\Constants\UserConstant::ROLE_STAFF)update, or delete @endif</strong> the product.</p></li>
+                        <li><p>You can also directly uploads the products with excel file without duplicate.</p></li>
+                        <li><p>Duplicate products are automatically download into excel file.</p></li>
                     </ul>
                 </div>
             </div>
