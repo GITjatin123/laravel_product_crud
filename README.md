@@ -20,7 +20,10 @@
 </h3>
 <ul>
 <li>Admin and Super Admin theme color are dark.</li>
+    ![image](https://github.com/user-attachments/assets/fd5e4290-d5ba-4cfc-9d8a-f9694f983d41)
 <li>Staff theme color are light.</li></ul>
+   ![image](https://github.com/user-attachments/assets/998c222d-2163-4037-9f1c-7473e37ce842)
+
 
 <h3>
 5. Admin and Super Admin can view,create,update or delete the products
