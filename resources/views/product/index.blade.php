@@ -1,13 +1,8 @@
-<?php
-
-//    $loginUser = \Illuminate\Support\Facades\Auth::user()['user_role'];
-//    echo $loginUser->user;
-?>
 <x-app-layout>
     <x-slot name="header">
         <div class="d-flex justify-content-between">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Products') }}
+                {{ __('Product') }}
             </h2>
             <a href="{{route('product.create')}}" class="btn btn-outline-success">
                 {{ __('Add New') }}
@@ -43,7 +38,7 @@
                                     <td>{{$productVal['name']}}</td>
                                     <td>{{$productVal['description']}}</td>
                                     <td>{{$productVal['price']}}</td>
-                                    <td><img src="{{ asset('storage/uploads/' . $productVal->image) }}" alt="Product Image" width="150"></td>
+                                    <td><img src="{{ asset('storage/uploads/' . $productVal->image) }}" alt="Product Image" width="100"></td>
                                     @if(auth()->check() && auth()->user()->role->name !== App\Constants\UserConstant::ROLE_STAFF)
                                         <td><a href="{{route('product.edit',$productVal->ref_no)}}"  class="btn btn-outline-warning">Edit</a></td>
                                         <td>

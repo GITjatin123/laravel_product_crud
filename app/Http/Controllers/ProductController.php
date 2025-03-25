@@ -153,20 +153,7 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')->with('success', 'Product created successfully.');
     }
-    public function showUploadForm()
-    {
-        return view('upload');
-    }
 
-    public function importExcel(Request $request)
-    {
-        $request->validate([
-            'excel_file' => 'required|mimes:xlsx,csv',
-        ]);
 
-        Excel::import(new ProductsImport, $request->file('excel_file'));
-
-        return back()->with('success', 'Products uploaded successfully!');
-    }
 
 }

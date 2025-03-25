@@ -19,8 +19,12 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::middleware('auth')->group(function () {
+    Route::get('/product/upload', [\App\Http\Controllers\ProductUploadController::class, 'showUploadForm'])->name('upload');
+    Route::post('/import-products', [\App\Http\Controllers\ProductUploadController::class, 'importExcel'])->name('import.products');
     Route::resource('/product', \App\Http\Controllers\ProductController::class);
+
 
 //    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 //    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
