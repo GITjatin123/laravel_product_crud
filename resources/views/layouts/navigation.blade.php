@@ -83,6 +83,9 @@
             <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
                 {{ __('Product') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('upload')" :active="request()->routeIs('upload')">
+                {{ __('Upload') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

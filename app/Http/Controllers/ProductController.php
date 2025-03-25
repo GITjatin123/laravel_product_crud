@@ -114,7 +114,7 @@ class ProductController extends Controller
             'price' => ['required', 'numeric','min:1'],
             'crop_data' => ['required'],
 //            'image' => ['image', 'mimes:jpg,jpeg,png', 'max:1024','min:5'],
-            'image' => [$Product->id ? 'nullable' : 'required', 'image', 'mimes:jpg,jpeg,png', 'max:1024','min:5'],
+            'image' => [$Product->id ? 'nullable' : 'required', 'image', 'mimes:jpg,jpeg,png', 'max:1024','min:500'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
