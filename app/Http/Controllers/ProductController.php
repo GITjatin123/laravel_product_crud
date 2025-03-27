@@ -140,8 +140,8 @@ class ProductController extends Controller
                 $img->crop((int) $cropData['width'], (int) $cropData['height'], (int) $cropData['x'], (int) $cropData['y']);
             }
             $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $path = storage_path('app/public/uploads/' . $fileName);
-            $img->save($path);
+            Storage::disk('public')->put('uploads/' . $fileName, $img->stream());
+            asset('storage/uploads/' . $fileName);
             $Product->image = $fileName;
         }
 
