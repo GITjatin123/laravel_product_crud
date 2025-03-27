@@ -139,10 +139,14 @@ class ProductController extends Controller
             if ($cropData) {
                 $img->crop((int) $cropData['width'], (int) $cropData['height'], (int) $cropData['x'], (int) $cropData['y']);
             }
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            Storage::disk('public')->put('uploads/' . $fileName, $img->stream());
-            asset('storage/uploads/' . $fileName);
+            // $fileName = time() . '.' . $file->getClientOriginalExtension();
+            // Storage::disk('public')->put('uploads/' . $fileName, $img->stream());
+            // asset('storage/uploads/' . $fileName);
+             $fileName = time() . '.' . $file->getClientOriginalExtension();
+                        $path = storage_path('app/public/uploads/' . $fileName);
+                        $img->save($path);
             $Product->image = $fileName;
+            
         }
 
         if ($isNewRecord) {
