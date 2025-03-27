@@ -11,6 +11,7 @@
     <li>Create APP_KEY by running command "php artisan key:generate" now it will showing in your .env file "APP_KEY=base..."</li>
     <li>Run migrations and seeders with command "php artisan migrate --seed".</li>
     <li>Run command "npm install" for vite dependencies.</li>
+    <li>Run command "php artisan storage:link"</li>
     <li>Run command "npm run build" for production build.</li>
     <li>All set...</li>
 </ul>
